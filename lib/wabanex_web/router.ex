@@ -5,10 +5,19 @@ defmodule WabanexWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # Adicionando roda para busca no banco sem GraphQL
   scope "/api", WabanexWeb do
     pipe_through :api
 
     get "/", IMCController, :index
+  end
+
+  # Adicionando as rotas para o GraphQL
+  scope "/api" do
+    pipe_through :api
+
+    forward "/graphql", Absinthe.Plug, schema: WabanexWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WabanexWeb.Schema
   end
 
   # Enables LiveDashboard only for development
