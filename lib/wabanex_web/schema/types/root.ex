@@ -1,6 +1,7 @@
 defmodule WabanexWeb.Schema.Types.Root do
   use Absinthe.Schema.Notation
 
+  alias Crudry.Middlewares.TranslateErrors
   alias WabanexWeb.Resolvers.User, as: UserResolver
 
   # Importando a macro de Usuario
@@ -21,6 +22,7 @@ defmodule WabanexWeb.Schema.Types.Root do
       arg :input, non_null(:create_user_input)
 
       resolve &UserResolver.create/2
+      middleware TranslateErrors
     end
   end
 end
