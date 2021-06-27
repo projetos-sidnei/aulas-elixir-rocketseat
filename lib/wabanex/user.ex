@@ -4,6 +4,8 @@ defmodule Wabanex.User do
   # Importando funções do Changeset para a função
   import Ecto.Changeset
 
+  alias Wabanex.Training
+
   # Configuração para gerar um id automaticamente
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -15,6 +17,8 @@ defmodule Wabanex.User do
     field :email, :string
     field :name, :string
     field :password, :string
+
+    has_many :trainings, Training
 
     timestamps()
   end

@@ -2,10 +2,17 @@ defmodule WabanexWeb.Schema.Types.Root do
   use Absinthe.Schema.Notation
 
   alias Crudry.Middlewares.TranslateErrors
-  alias WabanexWeb.Resolvers.User, as: UserResolver
 
-  # Importando a macro de Usuario
-  import_types WabanexWeb.Schema.Types.User
+  alias WabanexWeb.Resolvers
+  alias WabanexWeb.Schema.Types
+
+  alias Resolvers.User, as: UserResolver
+  alias Resolvers.Training, as: TrainingResolver
+
+  # Importando a macro de User, Training e Custom
+  import_types Types.Custom.UUID4
+  import_types Types.User
+  import_types Types.Training
 
   # Salva os campos nome e email
   object :root_query do
@@ -18,10 +25,17 @@ defmodule WabanexWeb.Schema.Types.Root do
 
   # Salva o campo password
   object :root_mutation do
-    field :craete_user, type: :user do
+    field :create_user, type: :user do
       arg :input, non_null(:create_user_input)
 
       resolve &UserResolver.create/2
+      middleware TranslateErrors
+    end
+
+    field :create_training, type: :training do
+      arg :input, non_null(:create_training_input)
+
+      resolve &TrainingResolver.create/2
       middleware TranslateErrors
     end
   end

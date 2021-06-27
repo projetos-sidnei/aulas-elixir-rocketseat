@@ -4,20 +4,20 @@ defmodule Wabanex.Exercise do
   # Importando funções do Changeset para a função
   import Ecto.Changeset
 
-  alias Wabenex.Training
+  alias Wabanex.Training
 
   # Configuração para gerar um id automaticamente
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
   # Constante para gerar a lista de campos para utilizar em validaçõe se inserções.
-  @fields [:end_date, :start_date, :user_id]
+  @fields [:name, :protocol_description, :repetitions, :youtube_video_url]
 
   # Schema User
   schema "exercises" do
     field :name, :string
     field :protocol_description, :string
-    field :repetition, :string
+    field :repetitions, :string
     field :youtube_video_url, :string
 
     belongs_to :training, Training

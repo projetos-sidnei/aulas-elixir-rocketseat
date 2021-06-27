@@ -1,15 +1,13 @@
 defmodule WabanexWeb.Schema.Types.User do
   use Absinthe.Schema.Notation
 
-  # Usando macro para importar um modulo (tipo) customizado
-  import_types WabanexWeb.Schema.Types.Custom.UUID4
-
   # Crinado as Mutations
   @desc "Logic user representation"
   object :user do
     field :id, non_null(:uuid4)
     field :name, non_null(:string)
     field :email, non_null(:string)
+    field :trainings, list_of(:training)
   end
 
   # Objeto de entrada de Dados, mutation de criação de usuário

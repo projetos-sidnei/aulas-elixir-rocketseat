@@ -4,8 +4,7 @@ defmodule Wabanex.Training do
   # Importando funções do Changeset para a função
   import Ecto.Changeset
 
-  alias Wabenex.{Exercise, User}
-
+  alias Wabanex.{Exercise, User}
 
   # Configuração para gerar um uuid automaticamente
   @primary_key {:id, :binary_id, autogenerate: true}
